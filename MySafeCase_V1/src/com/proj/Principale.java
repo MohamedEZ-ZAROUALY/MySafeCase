@@ -41,7 +41,7 @@ public class Principale extends JFrame {
 	 * Create the frame.
 	 */
 	public Principale() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\safe_40px.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\MySafeCase_V1\\src\\com\\proj\\images\\safe_40px.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
@@ -90,7 +90,7 @@ public class Principale extends JFrame {
 		panel_2.add(panel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\home_30px.png"));
+		lblNewLabel_5.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\home_30px.png"));
 		lblNewLabel_5.setBounds(28, 0, 45, 45);
 		panel_2.add(lblNewLabel_5);
 		
@@ -122,7 +122,7 @@ public class Principale extends JFrame {
 		panel_2_1.add(panel_4_1);
 		
 		JLabel lblNewLabel_5_1 = new JLabel("");
-		lblNewLabel_5_1.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\paste_as_text_40px.png"));
+		lblNewLabel_5_1.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\paste_as_text_40px.png"));
 		lblNewLabel_5_1.setBounds(23, 0, 46, 45);
 		panel_2_1.add(lblNewLabel_5_1);
 		
@@ -154,7 +154,7 @@ public class Principale extends JFrame {
 		panel_2_1_1.add(panel_4_2);
 		
 		JLabel lblNewLabel_5_2 = new JLabel("");
-		lblNewLabel_5_2.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\safe_in_40px.png"));
+		lblNewLabel_5_2.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\safe_in_40px.png"));
 		lblNewLabel_5_2.setBounds(26, 0, 53, 45);
 		panel_2_1_1.add(lblNewLabel_5_2);
 		
@@ -187,7 +187,7 @@ public class Principale extends JFrame {
 		panel_2_1_2.add(panel_4_3);
 		
 		JLabel lblNewLabel_5_3 = new JLabel("");
-		lblNewLabel_5_3.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\help_40px.png"));
+		lblNewLabel_5_3.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\help_40px.png"));
 		lblNewLabel_5_3.setBounds(28, 0, 50, 45);
 		panel_2_1_2.add(lblNewLabel_5_3);
 		
@@ -219,7 +219,7 @@ public class Principale extends JFrame {
 		panel_2_1_2_1.add(panel_4_4);
 		
 		JLabel lblNewLabel_5_4 = new JLabel("");
-		lblNewLabel_5_4.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\shutdown_40px.png"));
+		lblNewLabel_5_4.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\shutdown_40px.png"));
 		lblNewLabel_5_4.setBounds(28, 0, 52, 45);
 		panel_2_1_2_1.add(lblNewLabel_5_4);
 		
@@ -234,11 +234,6 @@ public class Principale extends JFrame {
 		Home_panel.setBounds(10, 11, 535, 439);
 		panel_1.add(Home_panel);
 		
-		final JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		fileChooser.setDialogTitle("Browse naar de  locatie waar je de gesorteerde bestanden wil zetten en klik op \"OPEN\"");
-		Home_panel.add(fileChooser, BorderLayout.NORTH);
-		fileChooser.setVisible(true);
 		
 		JPanel Editor_panel = new JPanel();
 		Editor_panel.setBounds(10, 11, 535, 439);
@@ -280,12 +275,12 @@ public class Principale extends JFrame {
 						}
 			}
 		});
-		butt_open.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\button_open.png"));
+		butt_open.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button_open.png"));
 		butt_open.setBounds(61, 0, 134, 56);
 		panel_3.add(butt_open);
 		
 		JLabel butt_save = new JLabel("");
-		butt_save.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\button_save.png"));
+		butt_save.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button_save.png"));
 		butt_save.setBounds(295, 0, 128, 56);
 		panel_3.add(butt_save);
 		butt_save.addMouseListener(new MouseAdapter() {
