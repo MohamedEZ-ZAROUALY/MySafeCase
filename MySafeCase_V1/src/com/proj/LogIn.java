@@ -58,7 +58,7 @@ public class LogIn extends JFrame {
 	 * Create the frame.
 	 */
 	public LogIn() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\safe_40px.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\MySafeCase_V1\\src\\com\\proj\\images\\safe_40px.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
 		Contentpanel_signin = new JPanel();
@@ -77,7 +77,7 @@ public class LogIn extends JFrame {
 		
 		JLabel lblNewLabel_5 = new JLabel("");
 
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\button5.png"));
+		lblNewLabel_5.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button5.png"));
 		lblNewLabel_5.setBounds(203, 98, 186, 62);
 		panel1_signin.add(lblNewLabel_5);
 		
@@ -94,7 +94,7 @@ public class LogIn extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 
-		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\button4.png"));
+		lblNewLabel_3.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button4.png"));
 		lblNewLabel_3.setBounds(48, 98, 194, 62);
 		panel1_signin.add(lblNewLabel_3);
 		
@@ -239,7 +239,7 @@ public class LogIn extends JFrame {
 			}
 		});
 
-		button_create.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\button6.png"));
+		button_create.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button6.png"));
 		button_create.setBounds(76, 331, 165, 71);
 		panel2_signup.add(button_create);
 		
@@ -317,7 +317,7 @@ public class LogIn extends JFrame {
 		panel2_signin.add(passwordField);
 		
 		JLabel button_connection = new JLabel("");
-		button_connection.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\button3.png"));
+		button_connection.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button3.png"));
 		button_connection.setBounds(66, 269, 192, 71);
 		panel2_signin.add(button_connection);
 		
