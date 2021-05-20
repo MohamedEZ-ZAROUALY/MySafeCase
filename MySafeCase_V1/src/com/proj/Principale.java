@@ -7,6 +7,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
@@ -15,6 +20,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class Principale extends JFrame {
 
@@ -56,12 +63,18 @@ public class Principale extends JFrame {
 		panel.setBounds(0, 0, 231, 461);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
+		String languages [] = {"English","Français","Español"};
+		JComboBox comboBox = new JComboBox(languages);
+
+		comboBox.setBounds(95, 28, 92, 22);
+		panel.add(comboBox);
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\administrator_male_40px.png"));
-		lblNewLabel.setBounds(80, 36, 64, 65);
+		lblNewLabel.setBounds(21, 11, 64, 65);
 		panel.add(lblNewLabel);
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -81,7 +94,7 @@ public class Principale extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Home");
 		lblNewLabel_1.setFont(new Font("Georgia", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(83, 11, 62, 34);
+		lblNewLabel_1.setBounds(83, 0, 148, 45);
 		panel_2.add(lblNewLabel_1);
 		
 		JPanel panel_4 = new JPanel();
@@ -113,7 +126,7 @@ public class Principale extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("MyEditor");
 		lblNewLabel_2.setFont(new Font("Georgia", Font.BOLD, 14));
-		lblNewLabel_2.setBounds(79, 11, 76, 23);
+		lblNewLabel_2.setBounds(79, 0, 152, 45);
 		panel_2_1.add(lblNewLabel_2);
 		
 		JPanel panel_4_1 = new JPanel();
@@ -145,7 +158,7 @@ public class Principale extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("GoSecure");
 		lblNewLabel_3.setFont(new Font("Georgia", Font.BOLD, 14));
-		lblNewLabel_3.setBounds(78, 11, 75, 23);
+		lblNewLabel_3.setBounds(78, 0, 153, 45);
 		panel_2_1_1.add(lblNewLabel_3);
 		
 		JPanel panel_4_2 = new JPanel();
@@ -178,7 +191,7 @@ public class Principale extends JFrame {
 		
 		JLabel lblNewLabel_4 = new JLabel("About");
 		lblNewLabel_4.setFont(new Font("Georgia", Font.BOLD, 14));
-		lblNewLabel_4.setBounds(78, 0, 68, 45);
+		lblNewLabel_4.setBounds(78, 0, 153, 45);
 		panel_2_1_2.add(lblNewLabel_4);
 		
 		JPanel panel_4_3 = new JPanel();
@@ -210,7 +223,7 @@ public class Principale extends JFrame {
 		
 		JLabel lblNewLabel_4_1 = new JLabel("Sign out");
 		lblNewLabel_4_1.setFont(new Font("Georgia", Font.BOLD, 14));
-		lblNewLabel_4_1.setBounds(80, 11, 81, 23);
+		lblNewLabel_4_1.setBounds(80, 0, 151, 45);
 		panel_2_1_2_1.add(lblNewLabel_4_1);
 		
 		JPanel panel_4_4 = new JPanel();
@@ -222,6 +235,26 @@ public class Principale extends JFrame {
 		lblNewLabel_5_4.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\shutdown_40px.png"));
 		lblNewLabel_5_4.setBounds(28, 0, 52, 45);
 		panel_2_1_2_1.add(lblNewLabel_5_4);
+		
+		JLabel sys_date = new JLabel("");
+		sys_date.setFont(new Font("Tahoma", Font.BOLD, 14));
+		sys_date.setForeground(new Color(255, 255, 255));
+		sys_date.setBounds(10, 99, 119, 26);
+		panel.add(sys_date);
+		
+		JLabel sys_heure = new JLabel("");
+		sys_heure.setFont(new Font("Tahoma", Font.BOLD, 14));
+		sys_heure.setForeground(new Color(255, 255, 255));
+		sys_heure.setBounds(129, 99, 92, 26);
+		panel.add(sys_heure);
+		
+		JLabel sys_day = new JLabel("");
+		sys_day.setHorizontalTextPosition(SwingConstants.CENTER);
+		sys_day.setForeground(new Color(255, 255, 255));
+		sys_day.setFont(new Font("Tahoma", Font.BOLD, 14));
+		sys_day.setBounds(57, 74, 119, 26);
+		panel.add(sys_day);
+		
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(30, 144, 255));
@@ -257,7 +290,7 @@ public class Principale extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				  var chooser = new java.awt.FileDialog(new Frame(),"Open a file", FileDialog.LOAD	);
 					 chooser.setVisible(true);
-
+					 	
 					 	String f = chooser.getDirectory()+chooser.getFile();
 						String stringbuffer= "";
 						try {
@@ -280,7 +313,7 @@ public class Principale extends JFrame {
 		panel_3.add(butt_open);
 		
 		JLabel butt_save = new JLabel("");
-		butt_save.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button_save.png"));
+		butt_save.setIcon(new ImageIcon("C:\\Users\\Mohamed\\Documents\\MySafeCase_V1\\src\\com\\proj\\images\\button_save.png"));
 		butt_save.setBounds(295, 0, 128, 56);
 		panel_3.add(butt_save);
 		butt_save.addMouseListener(new MouseAdapter() {
@@ -308,20 +341,20 @@ public class Principale extends JFrame {
 
 		}
 		});
-
 		
-		JLabel lblNewLabel_6 = new JLabel("MyEditor");
-		lblNewLabel_6.setFont(new Font("Bahnschrift", Font.BOLD, 14));
-		lblNewLabel_6.setBounds(220, 11, 89, 24);
-		Editor_panel.add(lblNewLabel_6);
+				
+				JLabel lblNewLabel_6 = new JLabel("MyEditor");
+				lblNewLabel_6.setFont(new Font("Bahnschrift", Font.BOLD, 14));
+				lblNewLabel_6.setBounds(220, 11, 89, 24);
+				Editor_panel.add(lblNewLabel_6);
 		
 		JPanel About_panel = new JPanel();
 		About_panel.setLayout(null);
 		About_panel.setBounds(10, 11, 535, 439);
 		panel_1.add(About_panel);
-		  
+		
 		JTextPane txtpnMySafecaseIs = new JTextPane();
-		txtpnMySafecaseIs.setText("MySafeCase is a school project developped by Java programming language ");
+		txtpnMySafecaseIs.setText("MySafeCase is a scholar project of two computer engineering students who wanted to take their Java programming skills into action.The project is a Desktop Application designed to be your friend , its main purpose is to enable you to secure your desired files or folders.The software contains other features as well, you can have some fun playing our games, create your text files with our simple text editor and so on.The software is mainly coded in Java ,and other programming languages like C, Python using their helping GUI libraries. So for that dear user we wish you a good time using our application.");
 		txtpnMySafecaseIs.setBounds(42, 144, 450, 230);
 		About_panel.add(txtpnMySafecaseIs);
 
@@ -349,5 +382,75 @@ public class Principale extends JFrame {
 				About_panel.setVisible(false);
 			}
 		});
+
+		
+    	String dayNames_eng[] = new DateFormatSymbols().getWeekdays();
+		String dayNames_fr[] = {"Samedi","Dimanche","Lundi","Mardi" ,"Mercredi", "Jeudi" ,"Vendredi"};
+		String dayNames_es[] = { "Sábado","Domingo","Lunes", "Martes", "Miércoles","Jueves", "Viernes"};
+		Calendar date = Calendar.getInstance();
+        
+        sys_day.setText("   "+dayNames_eng[date.get(Calendar.DAY_OF_WEEK)]);
+		Thread clock = new Thread (){
+		    public void run () {
+		        for(;;){
+		            Calendar Cal = new GregorianCalendar();
+		            int sconde= Cal.get(Calendar.SECOND);
+		            int minute= Cal.get(Calendar.MINUTE);
+		            int heure= Cal.get(Calendar.HOUR_OF_DAY);
+		            sys_heure.setText(String.format("%02d", heure)+" : "+ String.format("%02d",minute)+" : "+String.format("%02d",sconde));
+		            int mois= Cal.get(Calendar.MONTH);
+		            int jour= Cal.get(Calendar.DAY_OF_MONTH);
+		            int annee= Cal.get(Calendar.YEAR);
+		            sys_date.setText(String.format("%02d", jour)+" / "+String.format("%02d",mois+1)+" / "+String.format("%02d", annee));
+		            try{
+		                sleep(1000);}
+		            catch (InterruptedException ex){}
+		        }
+		        
+		    }
+		};
+		clock.start();
+				
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (comboBox.getSelectedIndex()==1) {
+					
+					lblNewLabel_1.setText("Acceuil");
+					lblNewLabel_2.setText("Mon éditeur");
+					lblNewLabel_3.setText("Sécurise-toi");
+					lblNewLabel_4.setText("Informations");
+					lblNewLabel_4_1.setText("Déconnexion");
+					lblNewLabel_6.setText("Mon éditeur");
+					sys_day.setText("   "+dayNames_fr[date.get(Calendar.DAY_OF_WEEK)]);
+				/*	Thread clock = new Thread (){
+					    public void run () {
+					        for(;;){
+								sys_day.setText("   "+dayNames_fr[date.get(Calendar.DAY_OF_WEEK)]);
+					        }		        
+					    }
+					};
+					clock.start();*/
+				}
+				
+				if (comboBox.getSelectedIndex()==2) {
+					
+					lblNewLabel_1.setText("Recepción ");
+					lblNewLabel_2.setText("MiEditor");
+					lblNewLabel_3.setText("Securidad");
+					lblNewLabel_4.setText("Informaciónes");
+					lblNewLabel_4_1.setText("Desconexión");
+					lblNewLabel_6.setText("MiEditor");
+					sys_day.setText("   "+dayNames_es[date.get(Calendar.DAY_OF_WEEK)]);
+				/*	Thread clock = new Thread (){
+					    public void run () {
+					        for(;;){
+								sys_day.setText("   "+dayNames_es[date.get(Calendar.DAY_OF_WEEK)]);
+					        }
+					    }
+					};
+					clock.start();*/
+				}
+			}
+		});
 	}
-}
+	}	

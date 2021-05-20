@@ -1,6 +1,7 @@
 package com.proj;
 
 import java.awt.BorderLayout;
+import java.sql.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -174,19 +175,17 @@ public class LogIn extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Connection conn = null;
+	            Statement stmt = null;
 		        try
-		        {	
+		        {	Class.forName("org.sqlite.JDBC");
 		        	if (textField_signup.getText().equals("") || passwordField_1.getText().equals("") || passwordField_2.getText().equals("")) {
 						JOptionPane.showMessageDialog(alert, "Veuillez remplir tous les champs ! ","Hey !",3,icon_disclaimer);
 		        	}
 		        	else
-		        	{String userName = "root";
-		            String password = "Tetuaniyorgulloso";
-		            String url = "jdbc:mysql://localhost:3306/MySafeCase";
-		            conn = DriverManager.getConnection (url, userName, password);
+		        	{  conn = DriverManager.getConnection("jdbc:sqlite:Mysafecase.db");
 		            String nom_utilisateur = textField_signup.getText();
 		            String password_account = passwordField_1.getText();
-		            Statement stmt = conn.createStatement();
+		            stmt = conn.createStatement();
 		            ResultSet rs =stmt.executeQuery("select Nom from Accounts");
 		            int index = 0;
 		            while (rs.next())
@@ -357,19 +356,19 @@ public class LogIn extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Connection conn = null;
+			      Statement stmt = null;
+
 		        try
-		        {	
+		        {	Class.forName("org.sqlite.JDBC");
 		        	if (textField_signin.getText().equals("") || passwordField.getText().equals("")) {
 						JOptionPane.showMessageDialog(alert, "Veuillez remplir tous les champs ! ","Hey",3,icon_disclaimer);
 		        	}
 		        	else
-		        	{String userName = "root";
-		            String password = "Tetuaniyorgulloso";
-		            String url = "jdbc:mysql://localhost:3306/MySafeCase";
-		            conn = DriverManager.getConnection (url, userName, password);
+		        	{
+			         conn = DriverManager.getConnection("jdbc:sqlite:Mysafecase.db");
 		            String nom_utilisateur = textField_signin.getText();
 		            String password_account = passwordField.getText();
-		            Statement stmt = conn.createStatement();
+		            stmt =conn.createStatement();
 		            int index = 0 ;
 		            ResultSet rs =stmt.executeQuery("select * from Accounts");
 		            while (rs.next())
