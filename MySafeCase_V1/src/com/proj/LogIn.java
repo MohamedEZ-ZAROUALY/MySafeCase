@@ -38,7 +38,7 @@ public class LogIn extends JFrame {
 	private JTextField textField_signin;
 	private JPasswordField passwordField;
 	private Component alert;
-
+	final LogIn that_frame = this ;
 	/**
 	 * Launch the application.
 	 */
@@ -199,7 +199,6 @@ public class LogIn extends JFrame {
 		            }
 		            else {
 		            	if(! passwordField_1.getText().equals(passwordField_2.getText()) ) {
-		            		//new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\administrator_male_40px.png")
 		            		JOptionPane.showMessageDialog(alert, "Les mots de passes ne sont pas identiques  ! ","Hey",3,icon_disclaimer);
 		            	}
 		            	else {
@@ -215,28 +214,22 @@ public class LogIn extends JFrame {
 		        }
 		        catch (Exception ex)
 		        {
-		            System.err.println ("Cannot connect to database server");
-		            ex.printStackTrace();
+		        	JOptionPane.showMessageDialog(alert, "Cannot connect to the database right now  ! ","Hey",3,icon_disclaimer);
 		        }
 
 		        finally
 		        {
-		            if (conn != null)
-		            {
 		                try
 		                {
-		                    System.out.println("\n***** Let terminate the Connection *****");
 		                    conn.close ();
-		                    System.out.println ("\nDatabase connection terminated...");
 		                }
 		                catch (Exception ex)
 		                {
-		                    System.out.println ("Error in connection termination!");
 		                }
 		            }
 		        }
 			}
-		});
+		);
 
 		button_create.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button6.png"));
 		button_create.setBounds(76, 331, 165, 71);
@@ -352,6 +345,7 @@ public class LogIn extends JFrame {
 		
 		Icon icon_validation = new ImageIcon(("..\\MySafeCase_V1\\src\\com\\proj\\images\\approval_40px.png"));
 		
+		
 		button_connection.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -378,6 +372,8 @@ public class LogIn extends JFrame {
 		            		index = 1;
 		            		var pr =new Principale();
 		            		pr.setVisible(true);
+		            		pr.Welcome_label.setText(" Welcome " + nom_utilisateur);
+		            		that_frame.setVisible(false);
 		            		break;
 		            	}
 		            }
@@ -389,26 +385,16 @@ public class LogIn extends JFrame {
 		        	
 		        catch (Exception ex)
 		        {
-		            System.err.println ("Cannot connect to database server");
-		            ex.printStackTrace();
+		        	JOptionPane.showMessageDialog(alert, "BCannt connect to the database for the moment  ! ","Hey",3,icon_disclaimer);
+		        }
+		        finally {
+		        	try {
+						conn.close();
+					} catch (SQLException e1) {
+	
+					}
 		        }
 
-		        finally
-		        {
-		            if (conn != null)
-		            {
-		                try
-		                {
-		                    System.out.println("\n***** Let terminate the Connection *****");
-		                    conn.close ();
-		                    System.out.println ("\nDatabase connection terminated...");
-		                }
-		                catch (Exception ex)
-		                {
-		                    System.out.println ("Error in connection termination!");
-		                }
-		            }
-		        }
 			}
 		});
 
