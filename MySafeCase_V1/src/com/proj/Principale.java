@@ -53,7 +53,8 @@ public class Principale extends JFrame {
 	Calendar date = Calendar.getInstance();
 	JPanel About_panel = new JPanel();
 	JLabel title_editor = new JLabel("MyEditor");
-	JLabel butt_open = new JLabel("");
+	JLabel butt_open = new JLabel("",null,JLabel.CENTER);
+	JLabel butt_save = new JLabel("",null,JLabel.CENTER);
 	JPanel editor_buttons = new JPanel();
 	JEditorPane editorPane = new JEditorPane();
 	JPanel Editor_panel = new JPanel();
@@ -71,7 +72,6 @@ public class Principale extends JFrame {
 	final Principale that_frame = this ;
 	private Component alert;
 	String[] modes ={"Dark","Light"};
-	JComboBox mode_box = new JComboBox( modes);
 	
 	/**
 	 * Launch the application.
@@ -112,7 +112,7 @@ public class Principale extends JFrame {
 
 
 
-		languages_box.setBounds(111, 11, 92, 22);
+		languages_box.setBounds(116, 34, 92, 22);
 		panel_left.add(languages_box);
 
 
@@ -312,6 +312,83 @@ public class Principale extends JFrame {
 		panel_right.setBounds(229, 0, 555, 461);
 		contentPane.add(panel_right);
 		panel_right.setLayout(null);
+		
+
+		Editor_panel.setBounds(10, 11, 535, 439);
+		panel_right.add(Editor_panel);
+		Editor_panel.setLayout(null);
+		
+				editorPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				editorPane.setBounds(27, 44, 478, 328);
+				Editor_panel.add(editorPane);
+				
+						editor_buttons.setBorder(new LineBorder(new Color(169, 169, 169), 1, true));
+						editor_buttons.setBounds(27, 372, 478, 56);
+						Editor_panel.add(editor_buttons);
+						editor_buttons.setLayout(null);
+						
+
+						butt_open.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								  var chooser = new java.awt.FileDialog(new Frame(),"Open a file", FileDialog.LOAD	);
+									 chooser.setVisible(true);
+									 	
+									 	String f = chooser.getDirectory()+chooser.getFile();
+										String stringbuffer= "";
+										try {
+											FileReader fr = new FileReader(f);
+									          int i;    
+									          while((i=fr.read())!=-1) {
+									        	  stringbuffer += ((char)i); 
+									          }
+									        editorPane.setText(stringbuffer);
+
+											fr.close();
+										}
+										catch(Exception e1 ){
+											JOptionPane.showMessageDialog(null,e1.getMessage());
+										}
+							}
+						});
+						butt_open.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\open_en.png"));
+						butt_open.setBounds(0, 0, 235, 56);
+						editor_buttons.add(butt_open);
+						
+						
+						butt_save.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\save_en.png"));
+						butt_save.setBounds(231, 0, 247, 56);
+						editor_buttons.add(butt_save);
+						butt_save.addMouseListener(new MouseAdapter() {
+							public void mouseClicked(MouseEvent e) {
+								   
+								  var chooser = new java.awt.FileDialog(new Frame(),"Save the file", FileDialog.SAVE);
+										 chooser.setVisible(true);
+										 
+									
+								  // chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);  
+								  // int result = chooser.showSaveDialog(null);
+								   // chooser.setDialogTitle("Save this File ");
+										 String content = editorPane.getText();
+										
+											    String f = chooser.getDirectory()+chooser.getFile();
+												FileWriter fw;
+												try {
+													fw = new FileWriter(f);
+													fw.write(content);
+													fw.flush();
+													fw.close();
+												} catch (Exception e2) {
+													JOptionPane.showMessageDialog(null,e2.getMessage());
+												}
+
+						}
+						});
+						
+
+								title_editor.setFont(new Font("Bahnschrift", Font.BOLD, 14));
+								title_editor.setBounds(220, 11, 89, 24);
+								Editor_panel.add(title_editor);
 
 		Home_panel.setLayout(null);
 		Home_panel.setBounds(10, 11, 535, 439);
@@ -325,83 +402,6 @@ public class Principale extends JFrame {
 		waving_label.setBounds(30, 57, 75, 52);
 		
 		Home_panel.add(waving_label);
-		
-
-		Editor_panel.setBounds(10, 11, 535, 439);
-		panel_right.add(Editor_panel);
-		Editor_panel.setLayout(null);
-
-		editorPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		editorPane.setBounds(27, 44, 478, 328);
-		Editor_panel.add(editorPane);
-
-		editor_buttons.setBorder(new LineBorder(new Color(169, 169, 169), 1, true));
-		editor_buttons.setBounds(27, 372, 478, 56);
-		Editor_panel.add(editor_buttons);
-		editor_buttons.setLayout(null);
-		
-
-		butt_open.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				  var chooser = new java.awt.FileDialog(new Frame(),"Open a file", FileDialog.LOAD	);
-					 chooser.setVisible(true);
-					 	
-					 	String f = chooser.getDirectory()+chooser.getFile();
-						String stringbuffer= "";
-						try {
-							FileReader fr = new FileReader(f);
-					          int i;    
-					          while((i=fr.read())!=-1) {
-					        	  stringbuffer += ((char)i); 
-					          }
-					        editorPane.setText(stringbuffer);
-
-							fr.close();
-						}
-						catch(Exception e1 ){
-							JOptionPane.showMessageDialog(null,e1.getMessage());
-						}
-			}
-		});
-		butt_open.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button_open.png"));
-		butt_open.setBounds(61, 0, 134, 56);
-		editor_buttons.add(butt_open);
-		
-		JLabel butt_save = new JLabel("");
-		butt_save.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\button_save.png"));
-		butt_save.setBounds(295, 0, 128, 56);
-		editor_buttons.add(butt_save);
-		butt_save.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(ActionEvent e) {
-				   
-				  var chooser = new java.awt.FileDialog(new Frame(),"Save the file", FileDialog.SAVE);
-						 chooser.setVisible(true);
-						 
-					
-				  // chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);  
-				  // int result = chooser.showSaveDialog(null);
-				   // chooser.setDialogTitle("Save this File ");
-						 String content = editorPane.getText();
-						
-							    String f = chooser.getDirectory()+chooser.getFile();
-								FileWriter fw;
-								try {
-									fw = new FileWriter(f);
-									fw.write(content);
-									fw.flush();
-									fw.close();
-								} catch (Exception e2) {
-									JOptionPane.showMessageDialog(null,e2.getMessage());
-								}
-
-		}
-		});
-		
-
-				title_editor.setFont(new Font("Bahnschrift", Font.BOLD, 14));
-				title_editor.setBounds(220, 11, 89, 24);
-				Editor_panel.add(title_editor);
 				
 	
 		About_panel.setLayout(null);
@@ -440,9 +440,6 @@ public class Principale extends JFrame {
 
         
         sys_day.setText("   "+dayNames_eng[date.get(Calendar.DAY_OF_WEEK)]);
-        mode_box.setBounds(111, 44, 92, 22);
-        
-        panel_left.add(mode_box);
 		Thread clock = new Thread (){
 		    public void run () {
 		        for(;;){
@@ -466,6 +463,28 @@ public class Principale extends JFrame {
 				
 		languages_box.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
+				if (languages_box.getSelectedIndex()== 0) {
+					
+					label_home.setText("Home ");
+					label_editor.setText("MyEditor");
+					label_secure.setText("GoSecure");
+					label_about.setText("About");
+					label_signout.setText("Sign out");
+					title_editor.setText("MyEditor");
+					sys_day.setText("   "+dayNames_es[date.get(Calendar.DAY_OF_WEEK)]);
+					butt_open.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\open_en.png"));
+					butt_save.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\save_en.png"));
+
+				/*	Thread clock = new Thread (){
+					    public void run () {
+					        for(;;){
+								sys_day.setText("   "+dayNames_es[date.get(Calendar.DAY_OF_WEEK)]);
+					        }
+					    }
+					};
+					clock.start();*/
+				}
+				
 				if (languages_box.getSelectedIndex()==1) {
 					
 					label_home.setText("Acceuil");
@@ -475,6 +494,9 @@ public class Principale extends JFrame {
 					label_signout.setText("Déconnexion");
 					title_editor.setText("Mon éditeur");
 					sys_day.setText("   "+dayNames_fr[date.get(Calendar.DAY_OF_WEEK)]);
+					butt_open.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\open_fr.png"));
+					butt_save.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\save_fr.png"));			
+
 				/*	Thread clock = new Thread (){
 					    public void run () {
 					        for(;;){
@@ -484,6 +506,7 @@ public class Principale extends JFrame {
 					};
 					clock.start();*/
 				}
+
 				
 				if (languages_box.getSelectedIndex()==2) {
 					
@@ -494,6 +517,9 @@ public class Principale extends JFrame {
 					label_signout.setText("Desconexión");
 					title_editor.setText("MiEditor");
 					sys_day.setText("   "+dayNames_es[date.get(Calendar.DAY_OF_WEEK)]);
+					butt_open.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\open_es.png"));
+					butt_save.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\save_es.png"));
+
 				/*	Thread clock = new Thread (){
 					    public void run () {
 					        for(;;){
@@ -502,20 +528,6 @@ public class Principale extends JFrame {
 					    }
 					};
 					clock.start();*/
-				}
-			}
-		});
-		
-		mode_box.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if (mode_box.getSelectedIndex()==0) {
-					panel_left.setBackground(new Color(21, 51, 61));
-					panel_right.setBackground(new Color(54, 51, 61));
-				}
-				
-				if (mode_box.getSelectedIndex()==1) {
-					panel_left.setBackground(new Color(153, 204, 255));
-					panel_right.setBackground(new Color(30, 144, 255));
 				}
 			}
 		});
