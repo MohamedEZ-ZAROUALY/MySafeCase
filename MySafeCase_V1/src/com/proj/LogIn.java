@@ -135,6 +135,7 @@ public class LogIn extends JFrame {
 		
 
 		languages_box.setBounds(165, 38, 92, 22);
+		languages_box.setSelectedItem(0);
 		panel1_signin.add(languages_box);
 		
 
@@ -435,7 +436,16 @@ public class LogIn extends JFrame {
 		            		index = 1;
 		            		var pr =new Principale();
 		            		pr.setVisible(true);
-		            		pr.Welcome_label.setText(" Welcome " + nom_utilisateur);
+		            		pr.languages_box.setSelectedIndex(languages_box.getSelectedIndex());
+		            		if (languages_box.getSelectedIndex() == 0) {
+		            			pr.Welcome_label.setText(" Welcome " + nom_utilisateur);
+		            		}
+		            		if (languages_box.getSelectedIndex() == 1) {
+		            			pr.Welcome_label.setText(" Bienvenue " + nom_utilisateur);
+		            		}
+		            		if (languages_box.getSelectedIndex() == 2) {
+		            			pr.Welcome_label.setText(" Bienvenidos " + nom_utilisateur);
+		            		}
 		            		that_frame.setVisible(false);
 		            		break;
 		            	}
