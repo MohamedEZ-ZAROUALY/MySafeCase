@@ -68,10 +68,12 @@ public class Principale extends JFrame {
 	JPanel button_signout = new JPanel();
     JLabel Welcome_label = new JLabel("New label");
 	JLabel waving_label = new JLabel("");
+	JPanel Icons_panel;
 	final Principale that_frame = this ;
 	private Component alert;
 	String[] modes ={"Dark","Light"};
 	JComboBox mode_box = new JComboBox( modes);
+	private final JButton adding_button = new JButton("Add btn");
 	
 	/**
 	 * Launch the application.
@@ -203,6 +205,15 @@ public class Principale extends JFrame {
 				button_secure.setBackground(new Color(135,206,250));
 			}
 		});
+		label_secure.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Icons_panel.setVisible(true);
+        		Home_panel.setVisible(false);
+        		About_panel.setVisible(false);
+        		Editor_panel.setVisible(false);
+			}
+		});
 		
 	
 		label_secure.setFont(new Font("Georgia", Font.BOLD, 14));
@@ -213,8 +224,8 @@ public class Principale extends JFrame {
 		panel_4_2.setBackground(SystemColor.textHighlight);
 		panel_4_2.setBounds(0, 0, 23, 45);
 		button_secure.add(panel_4_2);
-		
-		
+        
+        
 		icon_secure.setIcon(new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\safe_in_40px.png"));
 		icon_secure.setBounds(26, 0, 53, 45);
 		button_secure.add(icon_secure);
@@ -373,7 +384,7 @@ public class Principale extends JFrame {
 		butt_save.setBounds(295, 0, 128, 56);
 		editor_buttons.add(butt_save);
 		butt_save.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(ActionEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				   
 				  var chooser = new java.awt.FileDialog(new Frame(),"Save the file", FileDialog.SAVE);
 						 chooser.setVisible(true);
@@ -411,6 +422,27 @@ public class Principale extends JFrame {
 		txtpnMySafecaseIs.setText("MySafeCase is a scholar project of two computer engineering students who wanted to take their Java programming skills into action.The project is a Desktop Application designed to be your friend , its main purpose is to enable you to secure your desired files or folders.The software contains other features as well, you can have some fun playing our games, create your text files with our simple text editor and so on.The software is mainly coded in Java ,and other programming languages like C, Python using their helping GUI libraries. So for that dear user we wish you a good time using our application.");
 		txtpnMySafecaseIs.setBounds(42, 144, 450, 230);
 		About_panel.add(txtpnMySafecaseIs);
+		
+		Icons_panel = new JPanel();
+		Icons_panel.setVisible(false);
+		Icons_panel.setBounds(10, 11, 535, 439);
+		panel_right.add(Icons_panel);
+		Icons_panel.setLayout(null);
+		adding_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Myicon(Icons_panel,40,180);
+			}
+		});
+		adding_button.setBounds(20, 20, 120, 30);
+		
+		Icons_panel.add(adding_button);
+		
+		/*JLabel testlbl = new JLabel("file 1");
+		testlbl.setBounds(40, 100, 50, 50);
+		Icons_panel.add(testlbl);*/
+		
+		Myicon myicon = new Myicon(Icons_panel,40,100);
+		
 
 		button_editor.addMouseListener(new MouseAdapter() {
 			@Override
