@@ -289,7 +289,7 @@ public class Principale extends JFrame {
 						that_frame.setVisible(false);	  
 			}
 			}});
-
+		
 		label_signout.setFont(new Font("Georgia", Font.BOLD, 14));
 		label_signout.setBounds(80, 0, 151, 45);
 		button_signout.add(label_signout);
@@ -430,7 +430,7 @@ public class Principale extends JFrame {
 		Icons_panel.setLayout(null);
 		adding_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Myicon(Icons_panel,40,180);
+				new Myicon(Icons_panel);
 			}
 		});
 		adding_button.setBounds(20, 20, 120, 30);
@@ -440,8 +440,6 @@ public class Principale extends JFrame {
 		/*JLabel testlbl = new JLabel("file 1");
 		testlbl.setBounds(40, 100, 50, 50);
 		Icons_panel.add(testlbl);*/
-		
-		Myicon myicon = new Myicon(Icons_panel,40,100);
 		
 
 		button_editor.addMouseListener(new MouseAdapter() {
