@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.System.Logger;
@@ -430,7 +431,17 @@ public class Principale extends JFrame {
 		Icons_panel.setLayout(null);
 		adding_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Myicon(Icons_panel);
+				File f;
+				try {
+					FileDialog scan = new java.awt.FileDialog((java.awt.Frame) null);
+					scan.setVisible(true);
+					//JFileChooser scan = new JFileChooser();
+					f=scan.getFiles()[0];
+					new Myicon(Icons_panel,f);
+					}catch(Exception ex){
+						System.out.println(ex.getMessage());
+						return;
+					}
 			}
 		});
 		adding_button.setBounds(20, 20, 120, 30);
