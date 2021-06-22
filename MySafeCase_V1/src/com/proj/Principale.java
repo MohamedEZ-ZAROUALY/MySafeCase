@@ -8,9 +8,18 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormatSymbols;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionListener;
@@ -74,8 +83,15 @@ public class Principale extends JFrame {
 	private Component alert;
 	String[] modes ={"Dark","Light"};
 	JComboBox mode_box = new JComboBox( modes);
-	private final JButton adding_button = new JButton("Add btn");
-	
+	private final JButton adding_button = new JButton("Add File");
+	private Principale myref=this;
+	public JPopupMenu IconsMenu = new JPopupMenu();
+	JMenuItem ItemDelete = new JMenuItem("delete");
+	JMenuItem ItemRename = new JMenuItem("Rename");
+	JMenuItem ItemCypher = new JMenuItem("Cypher");
+	JMenuItem ItemAddNew = new JMenuItem("New File");
+	JMenuItem ItemExport = new JMenuItem("Export");
+	static public int UserID;
 	/**
 	 * Launch the application.
 	 */
@@ -209,10 +225,43 @@ public class Principale extends JFrame {
 		label_secure.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				System.out.println("user = "+UserID);
 				Icons_panel.setVisible(true);
         		Home_panel.setVisible(false);
         		About_panel.setVisible(false);
         		Editor_panel.setVisible(false);
+        		if(Myicon.nIcon==0){
+	        		//File[] files = new File("../MySafeCase_V1/src/com/proj/files/").listFiles();
+        			Connection conn;
+        			ResultSet rs;
+					try {
+						conn = DriverManager.getConnection("jdbc:sqlite:Mysafecase.db");
+						Statement stmt = conn.createStatement();
+	        			rs =stmt.executeQuery("Select Name from Files where Owner="+UserID+";");
+	        			while (rs.next())
+			            {
+	        				File f=new File("../MySafeCase_V1/src/com/proj/files/"+rs.getString("Name"));
+			            	if(f.exists()) {
+			            		new Myicon(myref, Icons_panel,f,0);
+			            	}
+			            }
+	        			conn.close();
+	        			
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	        		/*for (File file : files) {
+	        		    if (file.isFile() && true) {
+	        		    	new Myicon(Icons_panel,file);
+	        		    }
+	        		}*/
+	        	}
+        		/*FileDialog scan = new java.awt.FileDialog((java.awt.Frame) null);
+				scan.setVisible(true);
+				//JFileChooser scan = new JFileChooser();
+				File f=scan.getFiles()[0];
+				new Myicon(Icons_panel,f);*/
 			}
 		});
 		
@@ -389,8 +438,6 @@ public class Principale extends JFrame {
 				   
 				  var chooser = new java.awt.FileDialog(new Frame(),"Save the file", FileDialog.SAVE);
 						 chooser.setVisible(true);
-						 
-					
 				  // chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);  
 				  // int result = chooser.showSaveDialog(null);
 				   // chooser.setDialogTitle("Save this File ");
@@ -415,7 +462,7 @@ public class Principale extends JFrame {
 				title_editor.setBounds(220, 11, 89, 24);
 				Editor_panel.add(title_editor);
 				
-	
+		
 		About_panel.setLayout(null);
 		About_panel.setBounds(10, 11, 535, 439);
 		panel_right.add(About_panel);
@@ -423,12 +470,13 @@ public class Principale extends JFrame {
 		txtpnMySafecaseIs.setText("MySafeCase is a scholar project of two computer engineering students who wanted to take their Java programming skills into action.The project is a Desktop Application designed to be your friend , its main purpose is to enable you to secure your desired files or folders.The software contains other features as well, you can have some fun playing our games, create your text files with our simple text editor and so on.The software is mainly coded in Java ,and other programming languages like C, Python using their helping GUI libraries. So for that dear user we wish you a good time using our application.");
 		txtpnMySafecaseIs.setBounds(42, 144, 450, 230);
 		About_panel.add(txtpnMySafecaseIs);
-		
+
 		Icons_panel = new JPanel();
 		Icons_panel.setVisible(false);
 		Icons_panel.setBounds(10, 11, 535, 439);
 		panel_right.add(Icons_panel);
 		Icons_panel.setLayout(null);
+		
 		adding_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				File f;
@@ -437,7 +485,8 @@ public class Principale extends JFrame {
 					scan.setVisible(true);
 					//JFileChooser scan = new JFileChooser();
 					f=scan.getFiles()[0];
-					new Myicon(Icons_panel,f);
+					Myicon m = new Myicon(myref, Icons_panel,f,1);
+					m.addToUser();
 					}catch(Exception ex){
 						System.out.println(ex.getMessage());
 						return;
@@ -560,5 +609,88 @@ public class Principale extends JFrame {
 				}
 			}
 		});
+		ItemCypher.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Myicon.selectedIcon.Cypher();
+			}
+		});
+		ItemAddNew.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				File f;
+				try {
+					FileDialog scan = new java.awt.FileDialog((java.awt.Frame) null);
+					scan.setVisible(true);
+					//JFileChooser scan = new JFileChooser();
+					f=scan.getFiles()[0];
+					new Myicon(myref, Icons_panel,f,1);
+					}catch(Exception ex){
+						System.out.println(ex.getMessage());
+						return;
+					}
+			}
+		});
+		ItemDelete.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Myicon.selectedIcon.destroy();
+				
+			}
+		});
+		ItemRename.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String s = (String)JOptionPane.showInputDialog(Icons_panel, " nouveau nom ","Rename File",JOptionPane.QUESTION_MESSAGE,null, null, null);
+				if ((s == null) || (s.length() == 0)) return;
+				try {
+					Connection conn = DriverManager.getConnection("jdbc:sqlite:Mysafecase.db");
+					Statement stmt = conn.createStatement();
+					ResultSet rss=stmt.executeQuery("Select count(*) from Files where Name='" + s+ "' and Owner=" + Principale.UserID +";");
+					rss.next();
+					int isnew=rss.getInt(1);
+					conn.close();
+					if(isnew==1) {
+						JOptionPane.showMessageDialog(alert, "ce nom est deja utilisé ","Nom utilisé",3,new ImageIcon("..\\MySafeCase_V1\\src\\com\\proj\\images\\disclaimer_40px.png"));
+					}
+					else {
+						System.out.println("ohh hi mark");
+						Myicon.selectedIcon.setName(s);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		ItemExport.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		        System.setProperty("apple.awt.fileDialogForDirectories", "true");
+				FileDialog chooser = new java.awt.FileDialog(new Frame(),"Save the file", FileDialog.SAVE);
+				chooser.setMode(FileDialog.SAVE);
+				chooser.setFile(Myicon.selectedIcon.name+Myicon.selectedIcon.extention);
+				chooser.setVisible(true);
+				
+				/*JFileChooser f = new JFileChooser();
+		        f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
+		        f.showSaveDialog(null);*/
+
+		        System.out.println();
+		        System.out.println();
+		        try {
+					Files.copy(Myicon.selectedIcon.meFile.toPath(), new File(chooser.getDirectory()+chooser.getFile()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		IconsMenu.add(ItemDelete);
+		IconsMenu.add(ItemRename);
+		IconsMenu.add(ItemCypher);
+		IconsMenu.add(ItemAddNew);
+		IconsMenu.add(ItemExport);
 	}
 	}	

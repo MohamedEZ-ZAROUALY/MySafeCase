@@ -202,8 +202,7 @@ public class LogIn extends JFrame {
 		            		JOptionPane.showMessageDialog(alert, "Les mots de passes ne sont pas identiques  ! ","Hey",3,icon_disclaimer);
 		            	}
 		            	else {
-			            	stmt.executeUpdate("INSERT INTO Accounts  "
-				                    +"VALUES ('"+ nom_utilisateur +"','"+ password_account +"')");
+			            	stmt.executeUpdate("INSERT INTO Accounts(Nom,Pass)"+"VALUES ('"+ nom_utilisateur +"','"+ password_account +"')");
 				            conn.close();
 		            	}
 
@@ -371,6 +370,9 @@ public class LogIn extends JFrame {
 		            		JOptionPane.showMessageDialog(alert, "Bonne connection ! ","Hey",3,icon_validation);
 		            		index = 1;
 		            		var pr =new Principale();
+		            		Principale.UserID=rs.getInt("ID");
+		            		Myicon.nIcon=Myicon.nextx=Myicon.nexty=0;
+		            		System.out.println("user1="+rs.getInt("ID"));
 		            		pr.setVisible(true);
 		            		pr.Welcome_label.setText(" Welcome " + nom_utilisateur);
 		            		that_frame.setVisible(false);
